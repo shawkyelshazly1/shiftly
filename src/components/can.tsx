@@ -1,10 +1,11 @@
+import { Permission } from "@/constants/permissions";
 import { usePermissions } from "@/hooks/usePermissions";
 import type { ReactNode } from "react";
 
 type CanProps = {
-  permission?: string;
-  all?: string[];
-  any?: string[];
+  permission?: Permission;
+  all?: Permission[];
+  any?: Permission[];
   children: ReactNode;
   fallback?: ReactNode;
 };

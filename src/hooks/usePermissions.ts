@@ -1,12 +1,13 @@
-import { authClient } from "@/lib/auth.client";
+import { Permission } from "@/constants/permissions";
+import { Authsession } from "@/lib/auth.server";
 import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function usePermissions() {
-  const { data: session, isPending: sessionLoading } = authClient.useSession();
   const queryClient = useQueryClient();
 
-  const isAuthenticated = !!session?.user;
+  const sessionData = queryClient.getQueryData<Authsession>(["session"]);
+  const isAuthenticated = sessionData?.isAuthenticated ?? false;
 
   const query = useQuery({
     ...currentUserPermissionQueryOptions(),
@@ -15,17 +16,21 @@ export function usePermissions() {
 
   const permissions = query.data?.permissions ?? [];
 
-  const can = (permission: string): boolean => {
-    return permissions.includes(permission);
+  const hasPermission = (permission: Permission): boolean => {
+    if (permissions.includes(permission)) return true;
+    if (permissions.includes("*")) return true;
+    const [resource] = permission.split(":");
+    if (permissions.includes(`${resource}:*`)) return true;
+    return false;
   };
 
-  const canAll = (...required: string[]): boolean => {
-    return required.every((p) => permissions.includes(p));
-  };
+  const can = (permission: Permission): boolean => hasPermission(permission);
 
-  const canAny = (...required: string[]): boolean => {
-    return required.some((p) => permissions.includes(p));
-  };
+  const canAll = (...required: Permission[]): boolean =>
+    required.every((p) => hasPermission(p));
+
+  const canAny = (...required: Permission[]): boolean =>
+    required.some((p) => hasPermission(p));
 
   const refetch = () => {
     queryClient.invalidateQueries({ queryKey: ["user-permissions"] });
@@ -38,7 +43,7 @@ export function usePermissions() {
     canAll,
     canAny,
     refetch,
-    isLoading: sessionLoading || query.isLoading,
+    isLoading: query.isLoading,
     isError: query.isError,
   };
 }

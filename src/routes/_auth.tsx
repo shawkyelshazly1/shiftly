@@ -13,7 +13,6 @@ export const Route = createFileRoute("/_auth")({
     };
   },
   component: Authlayout,
-
   beforeLoad: async ({ search }) => {
     const auth = await getSessionFn();
 

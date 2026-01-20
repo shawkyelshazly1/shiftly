@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth.client";
+import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -27,6 +30,8 @@ export default function LoginForm({
 }: {
   redirectTo: string | undefined;
 }) {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   // login form wrapper
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -40,10 +45,14 @@ export default function LoginForm({
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     authClient.signIn.email({
       ...values,
-      callbackURL: redirectTo,
       fetchOptions: {
         onError: ({ error }) => {
           toast.error(error.message);
+        },
+        onSuccess: async () => {
+          await queryClient.fetchQuery(currentUserPermissionQueryOptions());
+
+          navigate({ to: redirectTo });
         },
       },
     });

@@ -1,5 +1,5 @@
 import LogoutButton from "@/components/logout-button";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/")({
   component: RouteComponent,
@@ -8,6 +8,7 @@ export const Route = createFileRoute("/_authenticated/")({
 function RouteComponent() {
   return (
     <div>
+      <Link to="/admin">admin</Link>
       <LogoutButton />
     </div>
   );

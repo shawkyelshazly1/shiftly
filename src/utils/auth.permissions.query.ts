@@ -11,18 +11,22 @@ export type PermissionsResponse = {
 export const getCurrentUserPermissions = createServerFn({
   method: "GET",
 }).handler(async () => {
-  const request = getRequest();
+  try {
+    const request = getRequest();
 
-  const response = await apiClient.get<PermissionsResponse>(
-    "/v1/permissions/me",
-    {
-      headers: {
-        cookie: request.headers.get("cookie") || "",
-      },
-    }
-  );
+    const response = await apiClient.get<PermissionsResponse>(
+      "/v1/permissions/me",
+      {
+        headers: {
+          cookie: request.headers.get("cookie") || "",
+        },
+      }
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return { permissions: [], roleId: null };
+  }
 });
 
 export const currentUserPermissionQueryOptions = () =>

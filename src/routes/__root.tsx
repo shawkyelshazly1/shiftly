@@ -8,11 +8,15 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  redirect,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import {
+  TanStackRouterDevtools,
+  TanStackRouterDevtoolsPanel,
+} from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 
-import { Authsession } from "@/lib/auth.server";
+import { Authsession, getSessionFn } from "@/lib/auth.server";
 import appCss from "../styles/app.css?url";
 
 interface RouterContext {
@@ -43,6 +47,15 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   }),
   component: RootComponent,
   shellComponent: RootDocument,
+  beforeLoad: async ({ context }) => {
+    const auth = await context.queryClient.ensureQueryData({
+      queryKey: ["session"],
+      queryFn: () => getSessionFn(),
+      staleTime: 5 * 60 * 1000,
+    });
+
+    return { auth };
+  },
 });
 
 function RootComponent() {
@@ -58,7 +71,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Toaster />
-        <TanStackDevtools
+        {/* <TanStackDevtools
           config={{
             position: "bottom-right",
           }}
@@ -67,12 +80,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               name: "Tanstack Router",
               render: <TanStackRouterDevtoolsPanel />,
             },
-            {
-              name: "Tanstack Query",
-              render: <ReactQueryDevtools />,
-            },
           ]}
-        />
+        /> */}
+        <TanStackRouterDevtools position="bottom-right" />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
       </body>
     </html>

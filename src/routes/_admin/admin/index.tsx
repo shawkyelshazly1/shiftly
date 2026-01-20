@@ -8,8 +8,6 @@ export const Route = createFileRoute("/_admin/admin/")({
 function RouteComponent() {
   const { auth } = Route.useRouteContext();
 
-  console.log(auth);
-
   return (
     <div>
       <Link to="/">main</Link>
