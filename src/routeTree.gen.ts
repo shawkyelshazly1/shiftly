@@ -16,6 +16,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthResetPasswordIndexRouteImport } from './routes/_auth/reset-password/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin/index'
+import { Route as AdminAdminTestRouteImport } from './routes/_admin/admin/test'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -49,15 +50,22 @@ const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAdminTestRoute = AdminAdminTestRouteImport.update({
+  id: '/admin/test',
+  path: '/admin/test',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
+  '/admin/test': typeof AdminAdminTestRoute
   '/admin/': typeof AdminAdminIndexRoute
   '/login/': typeof AuthLoginIndexRoute
   '/reset-password/': typeof AuthResetPasswordIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
+  '/admin/test': typeof AdminAdminTestRoute
   '/admin': typeof AdminAdminIndexRoute
   '/login': typeof AuthLoginIndexRoute
   '/reset-password': typeof AuthResetPasswordIndexRoute
@@ -68,21 +76,23 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_admin/admin/test': typeof AdminAdminTestRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/reset-password/': typeof AuthResetPasswordIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin/' | '/login/' | '/reset-password/'
+  fullPaths: '/' | '/admin/test' | '/admin/' | '/login/' | '/reset-password/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/login' | '/reset-password'
+  to: '/' | '/admin/test' | '/admin' | '/login' | '/reset-password'
   id:
     | '__root__'
     | '/_admin'
     | '/_auth'
     | '/_authenticated'
     | '/_authenticated/'
+    | '/_admin/admin/test'
     | '/_admin/admin/'
     | '/_auth/login/'
     | '/_auth/reset-password/'
@@ -145,14 +155,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/admin/test': {
+      id: '/_admin/admin/test'
+      path: '/admin/test'
+      fullPath: '/admin/test'
+      preLoaderRoute: typeof AdminAdminTestRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAdminTestRoute: typeof AdminAdminTestRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdminTestRoute: AdminAdminTestRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,
 }
 

@@ -1,5 +1,5 @@
 import LogoutButton from "@/components/logout-button";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_admin/admin/")({
   component: RouteComponent,
@@ -12,6 +12,8 @@ function RouteComponent() {
 
   return (
     <div>
+      <Link to="/">main</Link>
+      <Link to="/admin/test">test</Link>
       <LogoutButton />
     </div>
   );

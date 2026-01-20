@@ -1,5 +1,8 @@
 /// <reference types="vite/client" />
 
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   HeadContent,
   Outlet,
@@ -7,14 +10,14 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Toaster } from "sonner";
 
-import appCss from "../styles/app.css?url";
 import { Authsession } from "@/lib/auth.server";
+import appCss from "../styles/app.css?url";
 
 interface RouterContext {
   auth?: Authsession;
+  queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
@@ -63,6 +66,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             {
               name: "Tanstack Router",
               render: <TanStackRouterDevtoolsPanel />,
+            },
+            {
+              name: "Tanstack Query",
+              render: <ReactQueryDevtools />,
             },
           ]}
         />
