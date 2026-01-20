@@ -1,0 +1,24 @@
+<svg width="118" height="106" viewBox="0 0 118 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Centered arrows icon -->
+  <g transform="translate(27, 0)">
+    <!-- Top arrow (right-pointing) -->
+    <path d="M6 12 C6 5, 12 5, 20 5 L44 5 L44 0 L64 15 L44 30 L44 25 L20 25 C12 25, 6 19, 6 12 Z" 
+          fill="url(#gradient)"/>
+    <!-- Bottom arrow (left-pointing) -->
+    <path d="M58 48 C58 55, 52 55, 44 55 L20 55 L20 60 L0 45 L20 30 L20 35 L44 35 C52 35, 58 41, 58 48 Z" 
+          fill="url(#gradient)"/>
+  </g>
+  
+  <!-- Wordmark centered below -->
+  <text x="59" y="99" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="600" fill="#F1F5F9" letter-spacing="-1" text-anchor="middle">
+    Shiftly
+  </text>
+</svg>
