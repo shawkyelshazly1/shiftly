@@ -1,0 +1,45 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="gradFaded" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#0EA5E9" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Magnifying glass circle -->
+  <circle cx="90" cy="75" r="40" fill="none" stroke="url(#grad)" stroke-width="4"/>
+  
+  <!-- Magnifying glass handle -->
+  <line x1="120" y1="105" x2="150" y2="135" stroke="url(#grad)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Question mark inside magnifying glass using arrows concept -->
+  <!-- Top arrow forming top of ? -->
+  <g opacity="0.6">
+    <path d="M75 55 C75 50, 80 50, 85 50 L100 50 L100 47 L110 55 L100 63 L100 60 L85 60 C80 60, 75 58, 75 55 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Curved part going down -->
+  <path d="M105 60 Q108 70, 95 80" stroke="url(#grad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Dot at bottom of ? -->
+  <circle cx="90" cy="95" r="4" fill="url(#grad)" opacity="0.6"/>
+  
+  <!-- Scattered small arrows around - searching -->
+  <g opacity="0.3">
+    <!-- Top left small arrow -->
+    <path d="M25 40 L35 40 L35 38 L42 43 L35 48 L35 46 L25 46 C22 46, 22 40, 25 40 Z" fill="url(#grad)"/>
+    <!-- Top right small arrow -->
+    <path d="M175 30 L165 30 L165 28 L158 33 L165 38 L165 36 L175 36 C178 36, 178 30, 175 30 Z" fill="url(#grad)"/>
+    <!-- Bottom left -->
+    <path d="M30 140 L40 140 L40 138 L47 143 L40 148 L40 146 L30 146 C27 146, 27 140, 30 140 Z" fill="url(#grad)"/>
+    <!-- Bottom right -->
+    <path d="M170 150 L160 150 L160 148 L153 153 L160 158 L160 156 L170 156 C173 156, 173 150, 170 150 Z" fill="url(#grad)"/>
+  </g>
+</svg>

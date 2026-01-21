@@ -33,9 +33,8 @@ export const Route = createFileRoute("/_admin")({
 
 function AdminLayout() {
   return (
-    <div className="container mx-auto">
-
-      <main className="p-4">
+    <div className="flex-1 flex flex-col w-full">
+      <main className="p-4 flex-1 flex flex-col w-full">
         <Outlet />
       </main>
     </div>

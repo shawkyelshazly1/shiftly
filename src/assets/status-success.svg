@@ -1,0 +1,42 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Success circle -->
+  <circle cx="100" cy="90" r="50" fill="none" stroke="url(#successGrad)" stroke-width="4"/>
+  
+  <!-- Checkmark -->
+  <path d="M75 90 L92 107 L128 68" 
+        fill="none" stroke="url(#successGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Top arrow - flowing smoothly -->
+  <g opacity="0.7">
+    <path d="M30 40 C30 34, 36 34, 42 34 L62 34 L62 30 L76 42 L62 54 L62 50 L42 50 C36 50, 30 46, 30 40 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Bottom arrow - flowing smoothly in opposite direction -->
+  <g opacity="0.7">
+    <path d="M170 140 C170 146, 164 146, 158 146 L138 146 L138 150 L124 138 L138 126 L138 130 L158 130 C164 130, 170 134, 170 140 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Celebration particles -->
+  <circle cx="45" cy="65" r="3" fill="url(#successGrad)" opacity="0.6"/>
+  <circle cx="155" cy="115" r="3" fill="url(#successGrad)" opacity="0.6"/>
+  <circle cx="60" cy="140" r="2" fill="url(#grad)" opacity="0.5"/>
+  <circle cx="140" cy="40" r="2" fill="url(#grad)" opacity="0.5"/>
+  
+  <!-- Small stars/sparkles -->
+  <path d="M165 60 L167 65 L172 67 L167 69 L165 74 L163 69 L158 67 L163 65 Z" fill="url(#successGrad)" opacity="0.5"/>
+  <path d="M35 120 L37 124 L41 126 L37 128 L35 132 L33 128 L29 126 L33 124 Z" fill="url(#successGrad)" opacity="0.5"/>
+</svg>

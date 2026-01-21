@@ -1,0 +1,53 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Top arrow - shifts down then back up -->
+  <g>
+    <path d="M8 12 C8 6, 14 6, 20 6 L40 6 L40 2 L56 14 L40 26 L40 22 L20 22 C14 22, 8 18, 8 12 Z" 
+          fill="url(#grad)">
+      <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        values="0,0; 0,18; 0,18; 0,0" 
+        keyTimes="0; 0.4; 0.5; 1"
+        dur="1.2s" 
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1"/>
+      <animate 
+        attributeName="opacity" 
+        values="1; 0.6; 0.6; 1" 
+        keyTimes="0; 0.4; 0.5; 1"
+        dur="1.2s" 
+        repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Bottom arrow - shifts up then back down -->
+  <g>
+    <path d="M56 52 C56 58, 50 58, 44 58 L24 58 L24 62 L8 50 L24 38 L24 42 L44 42 C50 42, 56 46, 56 52 Z" 
+          fill="url(#grad)">
+      <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        values="0,0; 0,-18; 0,-18; 0,0" 
+        keyTimes="0; 0.4; 0.5; 1"
+        dur="1.2s" 
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1"/>
+      <animate 
+        attributeName="opacity" 
+        values="1; 0.6; 0.6; 1" 
+        keyTimes="0; 0.4; 0.5; 1"
+        dur="1.2s" 
+        repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

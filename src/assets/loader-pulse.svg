@@ -1,0 +1,60 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g filter="url(#glow)">
+    <!-- Top arrow with pulse -->
+    <path d="M8 14 C8 8, 14 8, 20 8 L40 8 L40 4 L56 16 L40 28 L40 24 L20 24 C14 24, 8 20, 8 14 Z" 
+          fill="url(#grad)">
+      <animate 
+        attributeName="opacity" 
+        values="0.4; 1; 0.4" 
+        dur="1s" 
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+      <animateTransform 
+        attributeName="transform" 
+        type="scale" 
+        values="0.95; 1.02; 0.95" 
+        dur="1s" 
+        repeatCount="indefinite"
+        additive="sum"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+    </path>
+    
+    <!-- Bottom arrow with offset pulse -->
+    <path d="M56 50 C56 56, 50 56, 44 56 L24 56 L24 60 L8 48 L24 36 L24 40 L44 40 C50 40, 56 44, 56 50 Z" 
+          fill="url(#grad)">
+      <animate 
+        attributeName="opacity" 
+        values="1; 0.4; 1" 
+        dur="1s" 
+        repeatCount="indefinite"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+      <animateTransform 
+        attributeName="transform" 
+        type="scale" 
+        values="1.02; 0.95; 1.02" 
+        dur="1s" 
+        repeatCount="indefinite"
+        additive="sum"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+    </path>
+  </g>
+</svg>

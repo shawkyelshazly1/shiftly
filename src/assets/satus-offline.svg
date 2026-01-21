@@ -1,0 +1,46 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Cloud shape -->
+  <path d="M60 100 
+           C40 100, 40 75, 60 70 
+           C60 50, 90 45, 100 60 
+           C110 45, 145 50, 145 70 
+           C165 75, 165 100, 145 100 Z" 
+        fill="none" stroke="url(#grad)" stroke-width="3" opacity="0.4"/>
+  
+  <!-- Disconnected arrows inside cloud - trying to connect but failing -->
+  <!-- Left arrow pointing right -->
+  <g opacity="0.7">
+    <path d="M60 80 C60 75, 65 75, 70 75 L82 75 L82 72 L92 80 L82 88 L82 85 L70 85 C65 85, 60 83, 60 80 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Right arrow pointing left - with gap between them -->
+  <g opacity="0.7">
+    <path d="M140 80 C140 85, 135 85, 130 85 L118 85 L118 88 L108 80 L118 72 L118 75 L130 75 C135 75, 140 77, 140 80 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Dotted line showing broken connection -->
+  <line x1="92" y1="80" x2="108" y2="80" stroke="url(#grad)" stroke-width="2" stroke-dasharray="3 3" opacity="0.4"/>
+  
+  <!-- X mark showing no connection -->
+  <g transform="translate(100, 125)">
+    <line x1="-10" y1="-10" x2="10" y2="10" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+    <line x1="10" y1="-10" x2="-10" y2="10" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Signal waves - faded/broken -->
+  <path d="M50 130 Q45 120 50 110" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M40 135 Q32 120 40 105" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <path d="M150 130 Q155 120 150 110" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M160 135 Q168 120 160 105" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

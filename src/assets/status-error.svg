@@ -1,0 +1,46 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="errorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Warning triangle outline -->
+  <path d="M100 30 L160 130 L40 130 Z" fill="none" stroke="url(#errorGrad)" stroke-width="3" stroke-linejoin="round" opacity="0.3"/>
+  
+  <!-- Top broken arrow - disconnected/crashed -->
+  <g>
+    <!-- Left part of broken arrow -->
+    <path d="M55 70 C55 64, 61 64, 67 64 L82 64 L82 60 L82 68 L82 72 L67 72 C61 72, 55 68, 55 70 Z" 
+          fill="url(#grad)" opacity="0.7"/>
+    <!-- Right part - separated with gap -->
+    <path d="M100 64 L100 60 L114 72 L100 84 L100 80 L100 72 Z" 
+          fill="url(#grad)" opacity="0.7"/>
+  </g>
+  
+  <!-- Bottom broken arrow - disconnected -->
+  <g>
+    <!-- Right part of broken arrow -->
+    <path d="M145 110 C145 116, 139 116, 133 116 L118 116 L118 120 L118 112 L118 108 L133 108 C139 108, 145 112, 145 110 Z" 
+          fill="url(#grad)" opacity="0.7"/>
+    <!-- Left part - separated -->
+    <path d="M100 116 L100 120 L86 108 L100 96 L100 100 L100 108 Z" 
+          fill="url(#grad)" opacity="0.7"/>
+  </g>
+  
+  <!-- Exclamation mark in center -->
+  <rect x="96" y="85" width="8" height="20" rx="2" fill="url(#errorGrad)"/>
+  <circle cx="100" cy="115" r="5" fill="url(#errorGrad)"/>
+  
+  <!-- Small scattered broken pieces -->
+  <circle cx="90" cy="68" r="2" fill="url(#grad)" opacity="0.4"/>
+  <circle cx="110" cy="112" r="2" fill="url(#grad)" opacity="0.4"/>
+  <rect x="88" y="75" width="4" height="4" rx="1" fill="url(#grad)" opacity="0.3" transform="rotate(15 90 77)"/>
+  <rect x="108" y="100" width="4" height="4" rx="1" fill="url(#grad)" opacity="0.3" transform="rotate(-15 110 102)"/>
+</svg>

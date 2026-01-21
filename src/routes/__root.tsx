@@ -61,7 +61,11 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="flex-1 flex flex-col w-full ">
+      <Outlet />
+    </div>
+  );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -75,10 +79,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {!matchedAuthRoute && <Navbar />}
+        <div className="min-h-screen flex flex-col">
+          {!matchedAuthRoute && <Navbar />}
+          <div className="flex-1 flex flex-col h-[90%] ">{children}</div>
+          <Toaster />
+        </div>
 
-        {children}
-        <Toaster />
         {/* <TanStackDevtools
           config={{
             position: "bottom-right",

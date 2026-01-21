@@ -1,0 +1,39 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="gradFaded" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#0EA5E9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Empty box/container -->
+  <rect x="50" y="50" width="100" height="80" rx="8" fill="none" stroke="url(#gradFaded)" stroke-width="2" stroke-dasharray="6 4"/>
+  
+  <!-- Dashed lines inside representing missing rows -->
+  <line x1="65" y1="75" x2="135" y2="75" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+  <line x1="65" y1="90" x2="120" y2="90" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+  <line x1="65" y1="105" x2="130" y2="105" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Top arrow floating above - faded, pointing down but nothing to point at -->
+  <g opacity="0.5">
+    <path d="M70 20 C70 14, 76 14, 82 14 L102 14 L102 10 L116 22 L102 34 L102 30 L82 30 C76 30, 70 26, 70 20 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Bottom arrow below - faded, pointing up but nothing there -->
+  <g opacity="0.5">
+    <path d="M130 160 C130 166, 124 166, 118 166 L98 166 L98 170 L84 158 L98 146 L98 150 L118 150 C124 150, 130 154, 130 160 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Small dots representing emptiness -->
+  <circle cx="100" cy="90" r="3" fill="#334155"/>
+  <circle cx="88" cy="90" r="2" fill="#334155"/>
+  <circle cx="112" cy="90" r="2" fill="#334155"/>
+</svg>

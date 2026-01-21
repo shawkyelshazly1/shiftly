@@ -1,0 +1,49 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Clock face -->
+  <circle cx="100" cy="85" r="45" fill="none" stroke="url(#grad)" stroke-width="4"/>
+  
+  <!-- Clock center -->
+  <circle cx="100" cy="85" r="4" fill="url(#grad)"/>
+  
+  <!-- Hour marks -->
+  <g stroke="url(#grad)" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <line x1="100" y1="45" x2="100" y2="50"/>
+    <line x1="100" y1="120" x2="100" y2="125"/>
+    <line x1="60" y1="85" x2="65" y2="85"/>
+    <line x1="135" y1="85" x2="140" y2="85"/>
+  </g>
+  
+  <!-- Clock hands - showing time ran out (both pointing up like reset) -->
+  <line x1="100" y1="85" x2="100" y2="55" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="100" y1="85" x2="120" y2="70" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Circular arrow around clock - refresh/expired concept -->
+  <path d="M145 60 A50 50 0 1 0 145 110" 
+        fill="none" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M145 55 L145 68 L158 62" fill="url(#grad)" opacity="0.5"/>
+  
+  <!-- Faded arrows showing time passed -->
+  <g opacity="0.4">
+    <path d="M30 145 C30 139, 36 139, 42 139 L62 139 L62 135 L76 147 L62 159 L62 155 L42 155 C36 155, 30 151, 30 145 Z" 
+          fill="url(#grad)"/>
+  </g>
+  <g opacity="0.4">
+    <path d="M170 145 C170 151, 164 151, 158 151 L138 151 L138 155 L124 143 L138 131 L138 135 L158 135 C164 135, 170 139, 170 145 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Z's for sleep/timeout -->
+  <g fill="url(#grad)" opacity="0.3" font-family="system-ui, sans-serif" font-weight="bold">
+    <text x="150" y="45" font-size="16">Z</text>
+    <text x="162" y="35" font-size="12">Z</text>
+    <text x="170" y="28" font-size="9">Z</text>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="gradB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Orbit path (invisible, for reference) -->
+  <g transform="translate(32, 32)">
+    
+    <!-- First arrow orbiting -->
+    <g>
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0" 
+        to="360" 
+        dur="1.4s" 
+        repeatCount="indefinite"
+        calcMode="linear"/>
+      <g transform="translate(0, -16)">
+        <path d="M-12 0 L4 0 L4 -4 L12 3 L4 10 L4 6 L-12 6 C-15 6, -15 0, -12 0 Z" 
+              fill="url(#gradA)">
+          <animate 
+            attributeName="opacity" 
+            values="1;0.7;0.4;0.7;1" 
+            dur="1.4s" 
+            repeatCount="indefinite"/>
+        </path>
+      </g>
+    </g>
+    
+    <!-- Second arrow orbiting (180° offset) -->
+    <g>
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="180" 
+        to="540" 
+        dur="1.4s" 
+        repeatCount="indefinite"
+        calcMode="linear"/>
+      <g transform="translate(0, -16)">
+        <path d="M12 0 L-4 0 L-4 -4 L-12 3 L-4 10 L-4 6 L12 6 C15 6, 15 0, 12 0 Z" 
+              fill="url(#gradB)">
+          <animate 
+            attributeName="opacity" 
+            values="1;0.7;0.4;0.7;1" 
+            dur="1.4s" 
+            repeatCount="indefinite"/>
+        </path>
+      </g>
+    </g>
+    
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="lockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Lock body -->
+  <rect x="75" y="80" width="50" height="45" rx="6" fill="url(#lockGrad)" opacity="0.9"/>
+  
+  <!-- Lock shackle -->
+  <path d="M85 80 L85 60 C85 45, 115 45, 115 60 L115 80" 
+        fill="none" stroke="url(#lockGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+  
+  <!-- Keyhole -->
+  <circle cx="100" cy="98" r="6" fill="#0F0F1A"/>
+  <rect x="97" y="98" width="6" height="12" rx="1" fill="#0F0F1A"/>
+  
+  <!-- Top arrow - blocked, bouncing back -->
+  <g opacity="0.6">
+    <path d="M40 50 C40 44, 46 44, 52 44 L72 44 L72 40 L86 52 L72 64 L72 60 L52 60 C46 60, 40 56, 40 50 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Bottom arrow - blocked, bouncing back -->
+  <g opacity="0.6">
+    <path d="M160 130 C160 136, 154 136, 148 136 L128 136 L128 140 L114 128 L128 116 L128 120 L148 120 C154 120, 160 124, 160 130 Z" 
+          fill="url(#grad)"/>
+  </g>
+  
+  <!-- Blocked indicators - small bounced arrows -->
+  <g opacity="0.3">
+    <path d="M78 48 L72 52 L78 56" stroke="url(#grad)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M122 124 L128 128 L122 132" stroke="url(#grad)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Subtle shield outline behind lock -->
+  <path d="M100 25 L140 40 L140 90 C140 120 100 145 100 145 C100 145 60 120 60 90 L60 40 Z" 
+        fill="none" stroke="#1E293B" stroke-width="2" opacity="0.5"/>
+</svg>
