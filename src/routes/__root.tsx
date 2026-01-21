@@ -9,6 +9,7 @@ import {
   Scripts,
   createRootRouteWithContext,
   redirect,
+  useMatchRoute,
 } from "@tanstack/react-router";
 import {
   TanStackRouterDevtools,
@@ -18,6 +19,7 @@ import { Toaster } from "sonner";
 
 import { Authsession, getSessionFn } from "@/lib/auth.server";
 import appCss from "../styles/app.css?url";
+import Navbar from "@/components/navbar";
 
 interface RouterContext {
   auth?: Authsession;
@@ -63,12 +65,18 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const matchRoute = useMatchRoute();
+
+  const matchedAuthRoute =
+    matchRoute({ to: "/login" }) || matchRoute({ to: "/reset-password" });
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
+        {!matchedAuthRoute && <Navbar />}
+
         {children}
         <Toaster />
         {/* <TanStackDevtools

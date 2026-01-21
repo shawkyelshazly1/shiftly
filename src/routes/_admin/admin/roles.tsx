@@ -1,14 +1,12 @@
 import LogoutButton from "@/components/logout-button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_admin/admin/roles")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return (
-    <div>
-      <h1>Main page</h1>
-    </div>
-  );
+  const { auth } = Route.useRouteContext();
+
+  return <div>Roles page</div>;
 }

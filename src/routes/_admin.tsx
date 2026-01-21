@@ -1,6 +1,14 @@
-import { Authsession, getSessionFn } from "@/lib/auth.server";
+import Navbar from "@/components/navbar";
+import { PERMISSIONS } from "@/constants/permissions";
+import { Authsession } from "@/lib/auth.server";
 import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { requireAnyPermission } from "@/utils/routes.utils";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_admin")({
   component: AdminLayout,
@@ -15,16 +23,23 @@ export const Route = createFileRoute("/_admin")({
     const { permissions } = await context.queryClient.ensureQueryData(
       currentUserPermissionQueryOptions()
     );
-    // if (!permissions.includes("admin:access")) {
-    //   throw redirect({ to: "/" });
-    // }
+    requireAnyPermission([PERMISSIONS.ROLES_ALL, PERMISSIONS.SETTINGS_ALL], {
+      permissions,
+    });
 
     return { auth };
   },
 });
 
 function AdminLayout() {
-  return <Outlet />;
+  return (
+    <div className="container mx-auto">
+
+      <main className="p-4">
+        <Outlet />
+      </main>
+    </div>
+  );
 }
 
 export type AdminRouteContext = {

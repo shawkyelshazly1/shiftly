@@ -16,7 +16,9 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthResetPasswordIndexRouteImport } from './routes/_auth/reset-password/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin/index'
-import { Route as AdminAdminTestRouteImport } from './routes/_admin/admin/test'
+import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin/settings'
+import { Route as AdminAdminRolesRouteImport } from './routes/_admin/admin/roles'
+import { Route as AdminAdminPermissionsRouteImport } from './routes/_admin/admin/permissions'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -50,22 +52,36 @@ const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAdminTestRoute = AdminAdminTestRouteImport.update({
-  id: '/admin/test',
-  path: '/admin/test',
+const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminRolesRoute = AdminAdminRolesRouteImport.update({
+  id: '/admin/roles',
+  path: '/admin/roles',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminPermissionsRoute = AdminAdminPermissionsRouteImport.update({
+  id: '/admin/permissions',
+  path: '/admin/permissions',
   getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
-  '/admin/test': typeof AdminAdminTestRoute
+  '/admin/permissions': typeof AdminAdminPermissionsRoute
+  '/admin/roles': typeof AdminAdminRolesRoute
+  '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin/': typeof AdminAdminIndexRoute
   '/login/': typeof AuthLoginIndexRoute
   '/reset-password/': typeof AuthResetPasswordIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
-  '/admin/test': typeof AdminAdminTestRoute
+  '/admin/permissions': typeof AdminAdminPermissionsRoute
+  '/admin/roles': typeof AdminAdminRolesRoute
+  '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin': typeof AdminAdminIndexRoute
   '/login': typeof AuthLoginIndexRoute
   '/reset-password': typeof AuthResetPasswordIndexRoute
@@ -76,23 +92,41 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_admin/admin/test': typeof AdminAdminTestRoute
+  '/_admin/admin/permissions': typeof AdminAdminPermissionsRoute
+  '/_admin/admin/roles': typeof AdminAdminRolesRoute
+  '/_admin/admin/settings': typeof AdminAdminSettingsRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/reset-password/': typeof AuthResetPasswordIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin/test' | '/admin/' | '/login/' | '/reset-password/'
+  fullPaths:
+    | '/'
+    | '/admin/permissions'
+    | '/admin/roles'
+    | '/admin/settings'
+    | '/admin/'
+    | '/login/'
+    | '/reset-password/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin/test' | '/admin' | '/login' | '/reset-password'
+  to:
+    | '/'
+    | '/admin/permissions'
+    | '/admin/roles'
+    | '/admin/settings'
+    | '/admin'
+    | '/login'
+    | '/reset-password'
   id:
     | '__root__'
     | '/_admin'
     | '/_auth'
     | '/_authenticated'
     | '/_authenticated/'
-    | '/_admin/admin/test'
+    | '/_admin/admin/permissions'
+    | '/_admin/admin/roles'
+    | '/_admin/admin/settings'
     | '/_admin/admin/'
     | '/_auth/login/'
     | '/_auth/reset-password/'
@@ -155,23 +189,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/_admin/admin/test': {
-      id: '/_admin/admin/test'
-      path: '/admin/test'
-      fullPath: '/admin/test'
-      preLoaderRoute: typeof AdminAdminTestRouteImport
+    '/_admin/admin/settings': {
+      id: '/_admin/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminAdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/roles': {
+      id: '/_admin/admin/roles'
+      path: '/admin/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AdminAdminRolesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/permissions': {
+      id: '/_admin/admin/permissions'
+      path: '/admin/permissions'
+      fullPath: '/admin/permissions'
+      preLoaderRoute: typeof AdminAdminPermissionsRouteImport
       parentRoute: typeof AdminRoute
     }
   }
 }
 
 interface AdminRouteChildren {
-  AdminAdminTestRoute: typeof AdminAdminTestRoute
+  AdminAdminPermissionsRoute: typeof AdminAdminPermissionsRoute
+  AdminAdminRolesRoute: typeof AdminAdminRolesRoute
+  AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminAdminTestRoute: AdminAdminTestRoute,
+  AdminAdminPermissionsRoute: AdminAdminPermissionsRoute,
+  AdminAdminRolesRoute: AdminAdminRolesRoute,
+  AdminAdminSettingsRoute: AdminAdminSettingsRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,
 }
 

@@ -1,6 +1,7 @@
 import { Permission } from "@/constants/permissions";
 import { Authsession } from "@/lib/auth.server";
 import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
+import { hasPermission } from "@/utils/permissions.utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function usePermissions() {
@@ -16,21 +17,14 @@ export function usePermissions() {
 
   const permissions = query.data?.permissions ?? [];
 
-  const hasPermission = (permission: Permission): boolean => {
-    if (permissions.includes(permission)) return true;
-    if (permissions.includes("*")) return true;
-    const [resource] = permission.split(":");
-    if (permissions.includes(`${resource}:*`)) return true;
-    return false;
-  };
-
-  const can = (permission: Permission): boolean => hasPermission(permission);
+  const can = (permission: Permission): boolean =>
+    hasPermission(permission, permissions);
 
   const canAll = (...required: Permission[]): boolean =>
-    required.every((p) => hasPermission(p));
+    required.every((p) => hasPermission(p, permissions));
 
   const canAny = (...required: Permission[]): boolean =>
-    required.some((p) => hasPermission(p));
+    required.some((p) => hasPermission(p, permissions));
 
   const refetch = () => {
     queryClient.invalidateQueries({ queryKey: ["user-permissions"] });
