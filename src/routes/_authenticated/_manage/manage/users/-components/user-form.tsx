@@ -22,9 +22,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { permissionsQueryOptions } from "@/utils/queries/permissions.queries";
 import { rolesQueryOptions } from "@/utils/queries/roles.queries";
-import { groupPermissionsByResource, Permission } from "@/types/permission.types";
+import {
+  groupPermissionsByResource,
+  Permission,
+} from "@/types/permission.types";
 import { UserWithPermissions, UpdateUserInput } from "@/types/user.types";
-import { X, Plus, Shield } from "lucide-react";
+import { X, Plus, Shield, Check } from "lucide-react";
 
 interface UserFormProps {
   open: boolean;
@@ -54,8 +57,12 @@ export function UserForm({
 
   // Filter out permissions already in role
   const availablePermissions = permissions.filter(
-    (p) => !rolePermissionIds.includes(p.id) && !directPermissionIds.includes(p.id)
+    (p) =>
+      !rolePermissionIds.includes(p.id) && !directPermissionIds.includes(p.id)
   );
+
+  console.log(selectedRole);
+  console.log(directPermissionIds);
 
   // Reset form when user changes
   useEffect(() => {
@@ -67,7 +74,7 @@ export function UserForm({
 
   const handleAddPermission = (permissionId: string) => {
     setDirectPermissionIds((prev) => [...prev, permissionId]);
-    setShowPermissionPicker(false);
+    // setShowPermissionPicker(false);
   };
 
   const handleRemovePermission = (permissionId: string) => {
@@ -117,7 +124,9 @@ export function UserForm({
           </Avatar>
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold truncate">{user.name}</h3>
-            <p className="text-sm text-muted-foreground truncate">{user.email}</p>
+            <p className="text-sm text-muted-foreground truncate">
+              {user.email}
+            </p>
           </div>
         </div>
 
@@ -135,7 +144,10 @@ export function UserForm({
                     <div className="flex items-center gap-2">
                       <span>{role.name}</span>
                       {role.isSystem && (
-                        <Badge variant="secondary" className="text-xs px-1 py-0">
+                        <Badge
+                          variant="secondary"
+                          className="text-xs px-1 py-0"
+                        >
                           System
                         </Badge>
                       )}
@@ -193,9 +205,21 @@ export function UserForm({
                 size="sm"
                 onClick={() => setShowPermissionPicker(!showPermissionPicker)}
                 disabled={availablePermissions.length === 0}
+                className="cursor-pointer"
               >
-                <Plus className="h-3.5 w-3.5 mr-1" />
-                Add
+                {showPermissionPicker ? (
+                  <>
+                    {" "}
+                    <Check className="h-3.5 w-3.5 mr-1" />
+                    Done
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <Plus className="h-3.5 w-3.5 mr-1" />
+                    Add
+                  </>
+                )}
               </Button>
             </div>
 
@@ -206,27 +230,27 @@ export function UserForm({
                   Select permission to add:
                 </p>
                 <div className="max-h-48 overflow-y-auto space-y-1">
-                  {Object.entries(groupPermissionsByResource(availablePermissions)).map(
-                    ([resource, perms]) => (
-                      <div key={resource}>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide py-1">
-                          {resource}
-                        </p>
-                        <div className="flex flex-wrap gap-1">
-                          {perms.map((perm) => (
-                            <Badge
-                              key={perm.id}
-                              variant="outline"
-                              className="text-xs cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                              onClick={() => handleAddPermission(perm.id)}
-                            >
-                              {perm.action}
-                            </Badge>
-                          ))}
-                        </div>
+                  {Object.entries(
+                    groupPermissionsByResource(availablePermissions)
+                  ).map(([resource, perms]) => (
+                    <div key={resource}>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide py-1">
+                        {resource}
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {perms.map((perm) => (
+                          <Badge
+                            key={perm.id}
+                            variant="outline"
+                            className="text-xs cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                            onClick={() => handleAddPermission(perm.id)}
+                          >
+                            {perm.action}
+                          </Badge>
+                        ))}
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}

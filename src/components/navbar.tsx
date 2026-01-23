@@ -70,12 +70,6 @@ function AdminRoutes() {
           <DropdownMenuItem className="">Roles</DropdownMenuItem>
         </Link>
         <Link
-          to="/admin/permissions"
-          className="hover:not-[&.active]:*:focus:bg-gray-200 [&.active]:*:bg-gray-900 [&.active]:*:text-white *:cursor-pointer "
-        >
-          <DropdownMenuItem className=" ">Permissions</DropdownMenuItem>
-        </Link>
-        <Link
           to="/admin/settings"
           className="hover:not-[&.active]:*:focus:bg-gray-200 [&.active]:*:bg-gray-900 [&.active]:*:text-white *:cursor-pointer "
         >
