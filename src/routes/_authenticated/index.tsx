@@ -1,14 +1,15 @@
-import LogoutButton from "@/components/logout-button";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_authenticated/")({
-  component: RouteComponent,
+  component: HomePage,
 });
 
-function RouteComponent() {
+function HomePage() {
   return (
-    <div>
-      <h1>Main page</h1>
+    <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6">
+      <h1 className="font-semibold text-2xl text-muted-foreground">
+        Welcome to Shiftly
+      </h1>
     </div>
   );
 }

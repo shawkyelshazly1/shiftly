@@ -10,6 +10,8 @@ export type User = {
   roleName: string | null;
   createdAt: string;
   updatedAt: string;
+  invitationStatus?: 'pending' | 'accepted' | 'expired' | 'cancelled' | null;
+  invitationExpiresAt?: string | null;
 };
 
 export type UserWithPermissions = User & {

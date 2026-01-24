@@ -1,5 +1,4 @@
 import { Permission } from "@/constants/permissions";
-import { Authsession } from "@/lib/auth.server";
 import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
 import { hasPermission } from "@/utils/permissions.utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -7,13 +6,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 export function usePermissions() {
   const queryClient = useQueryClient();
 
-  const sessionData = queryClient.getQueryData<Authsession>(["session"]);
-  const isAuthenticated = sessionData?.isAuthenticated ?? false;
-
-  const query = useQuery({
-    ...currentUserPermissionQueryOptions(),
-    enabled: isAuthenticated,
-  });
+  // Query always runs - the server function handles unauthenticated users gracefully
+  // by returning empty permissions. This avoids race conditions with Better Auth's
+  // useSession hook which doesn't update immediately after login.
+  const query = useQuery(currentUserPermissionQueryOptions());
 
   const permissions = query.data?.permissions ?? [];
 

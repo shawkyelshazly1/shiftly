@@ -4,13 +4,13 @@ export type Invitation = {
   id: string;
   name: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   roleId: string;
-  expiresAt: Date;
+  expiresAt: string;
   token: string;
   userId: string;
   status: string;
   invitedById: string;
-  acceptedAt: Date | null;
+  acceptedAt: string | null;
 };

@@ -1,4 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -8,22 +17,26 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth.client";
-import { currentUserPermissionQueryOptions } from "@/utils/auth.permissions.query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Loader2 } from "lucide-react";
 
 const loginFormSchema = z.object({
-  email: z.email({ error: "Email address is required" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: z
-    .string({ error: "Password is required" })
-    .min(5, { message: "Password must be at least 5 characters long" })
-    .max(12, { message: "Password cannot be longer than 12 characters" }),
+    .string()
+    .min(5, { message: "Password must be at least 5 characters" })
+    .max(128, { message: "Password cannot exceed 128 characters" }),
+  rememberMe: z.boolean().default(false),
 });
+
+type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export default function LoginForm({
   redirectTo = "/",
@@ -32,88 +45,152 @@ export default function LoginForm({
 }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  // login form wrapper
-  const loginForm = useForm<z.infer<typeof loginFormSchema>>({
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
   });
 
-  // submit function
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
+  function onSubmit(values: LoginFormValues) {
+    setIsLoading(true);
+
     authClient.signIn.email({
-      ...values,
+      email: values.email,
+      password: values.password,
+      rememberMe: values.rememberMe,
       fetchOptions: {
         onError: ({ error }) => {
+          setIsLoading(false);
           toast.error(error.message);
         },
         onSuccess: async () => {
-          await queryClient.fetchQuery(currentUserPermissionQueryOptions());
+          // Reset all cached queries to ensure fresh data after login
+          queryClient.resetQueries({ queryKey: ["session"] });
+          queryClient.resetQueries({ queryKey: ["user-permissions"] });
+
+          // Invalidate the router to force all route loaders to re-run
+          await router.invalidate();
 
           navigate({ to: redirectTo });
         },
       },
     });
-
-    // authClient.signUp.email({
-    //   ...values,
-    //   name: "shawky",
-    //   fetchOptions: {
-    //     onError: ({ error }) => {
-    //       toast.error(error.message);
-    //     },
-    //   },
-    // });
   }
 
   return (
-    <>
-      <Form {...loginForm}>
-        <form
-          onSubmit={loginForm.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4 container w-3/4 sm:w-2/4 md:w-2/5 lg:w-1/4 px-6"
-        >
-          <FormField
-            control={loginForm.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="example@company.com"
-                    required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={loginForm.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="*******"
-                    {...field}
-                    required
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Login</Button>
-        </form>
-      </Form>
-    </>
+    <Card className="w-full shadow-lg border-border/50">
+      <CardHeader className="space-y-1 pb-4">
+        <CardTitle className="text-2xl font-semibold tracking-tight">
+          Welcome back
+        </CardTitle>
+        <CardDescription className="text-muted-foreground">
+          Enter your credentials to access your account
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <Form {...loginForm}>
+          <form
+            onSubmit={loginForm.handleSubmit(onSubmit)}
+            className="flex flex-col gap-5"
+          >
+            <FormField
+              control={loginForm.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="name@company.com"
+                      autoComplete="email"
+                      disabled={isLoading}
+                      className="h-10"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={loginForm.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Password</FormLabel>
+                    <Link
+                      to="/forgot-password"
+                      className="text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Enter your password"
+                      autoComplete="current-password"
+                      disabled={isLoading}
+                      className="h-10"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={loginForm.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <Label
+                    htmlFor="rememberMe"
+                    className="text-sm font-normal text-muted-foreground cursor-pointer select-none"
+                    onClick={() => field.onChange(!field.value)}
+                  >
+                    Remember me for 30 days
+                  </Label>
+                </FormItem>
+              )}
+            />
+
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full mt-2 h-11 font-medium"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign in"
+              )}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

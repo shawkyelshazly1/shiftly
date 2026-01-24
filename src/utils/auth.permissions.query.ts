@@ -8,9 +8,13 @@ export type PermissionsResponse = {
   roleId: string | null;
 };
 
+/**
+ * Server function to get current user's permissions
+ * Returns empty permissions on error (graceful degradation for UI)
+ */
 export const getCurrentUserPermissions = createServerFn({
   method: "GET",
-}).handler(async () => {
+}).handler(async (): Promise<PermissionsResponse> => {
   try {
     const request = getRequest();
 
@@ -25,6 +29,7 @@ export const getCurrentUserPermissions = createServerFn({
 
     return response.data;
   } catch (error) {
+    // Return empty permissions on error (user not authenticated)
     return { permissions: [], roleId: null };
   }
 });
@@ -33,5 +38,5 @@ export const currentUserPermissionQueryOptions = () =>
   queryOptions({
     queryKey: ["user-permissions"],
     queryFn: () => getCurrentUserPermissions(),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
   });

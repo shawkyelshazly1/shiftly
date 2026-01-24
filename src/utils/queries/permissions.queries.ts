@@ -3,12 +3,13 @@ import { getRequest } from "@tanstack/react-start/server";
 import { apiClient } from "../api-client";
 import { Permission } from "@/types/permission.types";
 import { queryOptions } from "@tanstack/react-query";
+import { parseAxiosError } from "../api-error.utils";
 
 /**
- * server function to get all permissions
+ * Server function to get all permissions
  */
 export const getAllPermissions = createServerFn({ method: "GET" }).handler(
-  async () => {
+  async (): Promise<Permission[]> => {
     try {
       const request = getRequest();
 
@@ -20,15 +21,17 @@ export const getAllPermissions = createServerFn({ method: "GET" }).handler(
 
       return response.data;
     } catch (error) {
-      console.error("Failed to fetch permissions: ", error);
-      throw new Error("Unable to fetch permissions at the moment.");
+      throw parseAxiosError(error);
     }
   }
 );
 
+/**
+ * Query options for React Query
+ */
 export const permissionsQueryOptions = () =>
   queryOptions({
     queryKey: ["permissions"],
     queryFn: () => getAllPermissions(),
-    staleTime: 10 * 6 * 1000, //10 mins
+    staleTime: 10 * 60 * 1000,
   });

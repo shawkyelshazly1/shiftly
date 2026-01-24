@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import axios from "axios";
+import { QueryClient } from "@tanstack/react-query";
 
 const axiosInstance = axios.create({
   baseURL: env.VITE_SERVER_URL + "/api",
@@ -10,9 +11,9 @@ const axiosInstance = axios.create({
 });
 
 // Store queryClient reference for interceptor
-let queryClientRef: any = null;
+let queryClientRef: QueryClient | null = null;
 
-export const setQueryClient = (qc: any) => {
+export const setQueryClient = (qc: QueryClient) => {
   queryClientRef = qc;
 };
 

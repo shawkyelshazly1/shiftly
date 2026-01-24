@@ -1,8 +1,11 @@
+import { PaginationParams } from "@/types/pagination.types";
 import { UpdateUserInput } from "@/types/user.types";
 import {
   deleteUserById,
   updateUser,
   userQueryOptions,
+  usersCountQueryOptions,
+  usersPaginatedQueryOptions,
   usersQueryOptions,
 } from "@/utils/queries/users.queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -12,6 +15,20 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
  */
 export function useUsers() {
   return useQuery(usersQueryOptions());
+}
+
+/**
+ * Hook to fetch user counts (global totals)
+ */
+export function useUsersCount() {
+  return useQuery(usersCountQueryOptions());
+}
+
+/**
+ * Hook to fetch paginated users
+ */
+export function useUsersPaginated(params: PaginationParams) {
+  return useQuery(usersPaginatedQueryOptions(params));
 }
 
 /**
@@ -30,8 +47,7 @@ export function useUpdateUser() {
   return useMutation({
     mutationFn: ({ id, userData }: { id: string; userData: UpdateUserInput }) =>
       updateUser({ data: { id, userData } }),
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["users", variables.id] });
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
@@ -47,6 +63,7 @@ export function useDeleteUser() {
     mutationFn: ({ id }: { id: string }) => deleteUserById({ data: { id } }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["users", "count"] });
     },
   });
 }

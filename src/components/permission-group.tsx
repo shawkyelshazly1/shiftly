@@ -67,7 +67,7 @@ export function PermissionGroup({
   };
 
   return (
-    <div className="rounded-lg border p-4">
+    <div className="rounded-lg border p-3 sm:p-4">
       <div className="flex items-center gap-3 mb-3 pb-3 border-b">
         {wildcardPerm ? (
           <>
@@ -100,18 +100,19 @@ export function PermissionGroup({
         )}
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {individualPerms.map((permission) => (
-          <div key={permission.id} className="flex items-center gap-2">
+          <div key={permission.id} className="flex items-center gap-2 min-w-0">
             <Checkbox
               id={permission.id}
               checked={wildcardSelected || selectedIds.includes(permission.id)}
               disabled={wildcardSelected}
               onCheckedChange={() => handleIndividualToggle(permission.id)}
+              className="shrink-0"
             />
             <Label
               htmlFor={permission.id}
-              className={`text-sm cursor-pointer ${
+              className={`text-sm cursor-pointer truncate ${
                 wildcardSelected
                   ? "text-muted-foreground/50"
                   : "text-muted-foreground"

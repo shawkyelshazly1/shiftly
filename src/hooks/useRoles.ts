@@ -1,8 +1,10 @@
+import { PaginationParams } from "@/types/pagination.types";
 import { CreateRoleInput, UpdateRoleInput } from "@/types/role.types";
 import {
   createRole,
   deleteRoleById,
   roleQueryOptions,
+  rolesPaginatedQueryOptions,
   rolesQueryOptions,
   updateRole,
 } from "@/utils/queries/roles.queries";
@@ -13,6 +15,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
  */
 export function useRoles() {
   return useQuery(rolesQueryOptions());
+}
+
+/**
+ * Hook to fetch paginated roles
+ */
+export function useRolesPaginated(params: PaginationParams) {
+  return useQuery(rolesPaginatedQueryOptions(params));
 }
 
 /**

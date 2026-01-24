@@ -4,12 +4,16 @@ export type Team = {
   id: string;
   name: string;
   description?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
-export type TeamWithMembers = Team & { teamMembers: User[] };
+export type TeamWithMembers = Team & { users: User[] };
 
-export type CreateTeamInput = { name: string; description?: string };
+export type CreateTeamInput = {
+  name: string;
+  description?: string;
+  teamMemberIds?: string[];
+};
 
 export type UpdateTeamInput = Partial<CreateTeamInput>;

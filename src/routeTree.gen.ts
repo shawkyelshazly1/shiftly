@@ -11,21 +11,20 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthRouteImport } from './routes/_auth'
-import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedManageRouteImport } from './routes/_authenticated/_manage'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedScheduleIndexRouteImport } from './routes/_authenticated/schedule/index'
 import { Route as AuthResetPasswordIndexRouteImport } from './routes/_auth/reset-password/index'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth/login/index'
-import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin/index'
-import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin/settings'
-import { Route as AdminAdminRolesRouteImport } from './routes/_admin/admin/roles'
+import { Route as AuthForgotPasswordIndexRouteImport } from './routes/_auth/forgot-password/index'
+import { Route as AuthenticatedSettingsUsersIndexRouteImport } from './routes/_authenticated/settings/users/index'
+import { Route as AuthenticatedSettingsTeamsIndexRouteImport } from './routes/_authenticated/settings/teams/index'
+import { Route as AuthenticatedSettingsRolesIndexRouteImport } from './routes/_authenticated/settings/roles/index'
+import { Route as AuthenticatedSettingsGeneralIndexRouteImport } from './routes/_authenticated/settings/general/index'
 import { Route as AuthenticatedScheduleTeamIndexRouteImport } from './routes/_authenticated/schedule/team/index'
 import { Route as AuthenticatedScheduleMeIndexRouteImport } from './routes/_authenticated/schedule/me/index'
-import { Route as AuthenticatedManageManageIndexRouteImport } from './routes/_authenticated/_manage/manage/index'
-import { Route as AuthenticatedManageManageUsersIndexRouteImport } from './routes/_authenticated/_manage/manage/users/index'
-import { Route as AuthenticatedManageManageTeamsIndexRouteImport } from './routes/_authenticated/_manage/manage/teams/index'
-import { Route as AuthenticatedManageManageScheduleIndexRouteImport } from './routes/_authenticated/_manage/manage/schedule/index'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -35,19 +34,27 @@ const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/_admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedManageRoute = AuthenticatedManageRouteImport.update({
-  id: '/_manage',
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSettingsIndexRoute =
+  AuthenticatedSettingsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
 const AuthenticatedScheduleIndexRoute =
   AuthenticatedScheduleIndexRouteImport.update({
     id: '/schedule/',
@@ -64,21 +71,35 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   path: '/login/',
   getParentRoute: () => AuthRoute,
 } as any)
-const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
-  id: '/admin/',
-  path: '/admin/',
-  getParentRoute: () => AdminRoute,
+const AuthForgotPasswordIndexRoute = AuthForgotPasswordIndexRouteImport.update({
+  id: '/forgot-password/',
+  path: '/forgot-password/',
+  getParentRoute: () => AuthRoute,
 } as any)
-const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
-  id: '/admin/settings',
-  path: '/admin/settings',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminAdminRolesRoute = AdminAdminRolesRouteImport.update({
-  id: '/admin/roles',
-  path: '/admin/roles',
-  getParentRoute: () => AdminRoute,
-} as any)
+const AuthenticatedSettingsUsersIndexRoute =
+  AuthenticatedSettingsUsersIndexRouteImport.update({
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
+const AuthenticatedSettingsTeamsIndexRoute =
+  AuthenticatedSettingsTeamsIndexRouteImport.update({
+    id: '/teams/',
+    path: '/teams/',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
+const AuthenticatedSettingsRolesIndexRoute =
+  AuthenticatedSettingsRolesIndexRouteImport.update({
+    id: '/roles/',
+    path: '/roles/',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
+const AuthenticatedSettingsGeneralIndexRoute =
+  AuthenticatedSettingsGeneralIndexRouteImport.update({
+    id: '/general/',
+    path: '/general/',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
 const AuthenticatedScheduleTeamIndexRoute =
   AuthenticatedScheduleTeamIndexRouteImport.update({
     id: '/schedule/team/',
@@ -91,135 +112,110 @@ const AuthenticatedScheduleMeIndexRoute =
     path: '/schedule/me/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedManageManageIndexRoute =
-  AuthenticatedManageManageIndexRouteImport.update({
-    id: '/manage/',
-    path: '/manage/',
-    getParentRoute: () => AuthenticatedManageRoute,
-  } as any)
-const AuthenticatedManageManageUsersIndexRoute =
-  AuthenticatedManageManageUsersIndexRouteImport.update({
-    id: '/manage/users/',
-    path: '/manage/users/',
-    getParentRoute: () => AuthenticatedManageRoute,
-  } as any)
-const AuthenticatedManageManageTeamsIndexRoute =
-  AuthenticatedManageManageTeamsIndexRouteImport.update({
-    id: '/manage/teams/',
-    path: '/manage/teams/',
-    getParentRoute: () => AuthenticatedManageRoute,
-  } as any)
-const AuthenticatedManageManageScheduleIndexRoute =
-  AuthenticatedManageManageScheduleIndexRouteImport.update({
-    id: '/manage/schedule/',
-    path: '/manage/schedule/',
-    getParentRoute: () => AuthenticatedManageRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
-  '/admin/roles': typeof AdminAdminRolesRoute
-  '/admin/settings': typeof AdminAdminSettingsRoute
-  '/admin/': typeof AdminAdminIndexRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/settings': typeof AuthenticatedSettingsRouteWithChildren
+  '/forgot-password/': typeof AuthForgotPasswordIndexRoute
   '/login/': typeof AuthLoginIndexRoute
   '/reset-password/': typeof AuthResetPasswordIndexRoute
   '/schedule/': typeof AuthenticatedScheduleIndexRoute
-  '/manage/': typeof AuthenticatedManageManageIndexRoute
+  '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/schedule/me/': typeof AuthenticatedScheduleMeIndexRoute
   '/schedule/team/': typeof AuthenticatedScheduleTeamIndexRoute
-  '/manage/schedule/': typeof AuthenticatedManageManageScheduleIndexRoute
-  '/manage/teams/': typeof AuthenticatedManageManageTeamsIndexRoute
-  '/manage/users/': typeof AuthenticatedManageManageUsersIndexRoute
+  '/settings/general/': typeof AuthenticatedSettingsGeneralIndexRoute
+  '/settings/roles/': typeof AuthenticatedSettingsRolesIndexRoute
+  '/settings/teams/': typeof AuthenticatedSettingsTeamsIndexRoute
+  '/settings/users/': typeof AuthenticatedSettingsUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
-  '/admin/roles': typeof AdminAdminRolesRoute
-  '/admin/settings': typeof AdminAdminSettingsRoute
-  '/admin': typeof AdminAdminIndexRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/forgot-password': typeof AuthForgotPasswordIndexRoute
   '/login': typeof AuthLoginIndexRoute
   '/reset-password': typeof AuthResetPasswordIndexRoute
   '/schedule': typeof AuthenticatedScheduleIndexRoute
-  '/manage': typeof AuthenticatedManageManageIndexRoute
+  '/settings': typeof AuthenticatedSettingsIndexRoute
   '/schedule/me': typeof AuthenticatedScheduleMeIndexRoute
   '/schedule/team': typeof AuthenticatedScheduleTeamIndexRoute
-  '/manage/schedule': typeof AuthenticatedManageManageScheduleIndexRoute
-  '/manage/teams': typeof AuthenticatedManageManageTeamsIndexRoute
-  '/manage/users': typeof AuthenticatedManageManageUsersIndexRoute
+  '/settings/general': typeof AuthenticatedSettingsGeneralIndexRoute
+  '/settings/roles': typeof AuthenticatedSettingsRolesIndexRoute
+  '/settings/teams': typeof AuthenticatedSettingsTeamsIndexRoute
+  '/settings/users': typeof AuthenticatedSettingsUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_admin': typeof AdminRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/_authenticated/_manage': typeof AuthenticatedManageRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_admin/admin/roles': typeof AdminAdminRolesRoute
-  '/_admin/admin/settings': typeof AdminAdminSettingsRoute
-  '/_admin/admin/': typeof AdminAdminIndexRoute
+  '/_auth/forgot-password/': typeof AuthForgotPasswordIndexRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_auth/reset-password/': typeof AuthResetPasswordIndexRoute
   '/_authenticated/schedule/': typeof AuthenticatedScheduleIndexRoute
-  '/_authenticated/_manage/manage/': typeof AuthenticatedManageManageIndexRoute
+  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/schedule/me/': typeof AuthenticatedScheduleMeIndexRoute
   '/_authenticated/schedule/team/': typeof AuthenticatedScheduleTeamIndexRoute
-  '/_authenticated/_manage/manage/schedule/': typeof AuthenticatedManageManageScheduleIndexRoute
-  '/_authenticated/_manage/manage/teams/': typeof AuthenticatedManageManageTeamsIndexRoute
-  '/_authenticated/_manage/manage/users/': typeof AuthenticatedManageManageUsersIndexRoute
+  '/_authenticated/settings/general/': typeof AuthenticatedSettingsGeneralIndexRoute
+  '/_authenticated/settings/roles/': typeof AuthenticatedSettingsRolesIndexRoute
+  '/_authenticated/settings/teams/': typeof AuthenticatedSettingsTeamsIndexRoute
+  '/_authenticated/settings/users/': typeof AuthenticatedSettingsUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin/roles'
-    | '/admin/settings'
-    | '/admin/'
+    | '/admin'
+    | '/settings'
+    | '/forgot-password/'
     | '/login/'
     | '/reset-password/'
     | '/schedule/'
-    | '/manage/'
+    | '/settings/'
     | '/schedule/me/'
     | '/schedule/team/'
-    | '/manage/schedule/'
-    | '/manage/teams/'
-    | '/manage/users/'
+    | '/settings/general/'
+    | '/settings/roles/'
+    | '/settings/teams/'
+    | '/settings/users/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin/roles'
-    | '/admin/settings'
     | '/admin'
+    | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/schedule'
-    | '/manage'
+    | '/settings'
     | '/schedule/me'
     | '/schedule/team'
-    | '/manage/schedule'
-    | '/manage/teams'
-    | '/manage/users'
+    | '/settings/general'
+    | '/settings/roles'
+    | '/settings/teams'
+    | '/settings/users'
   id:
     | '__root__'
-    | '/_admin'
     | '/_auth'
     | '/_authenticated'
-    | '/_authenticated/_manage'
+    | '/_authenticated/admin'
+    | '/_authenticated/settings'
     | '/_authenticated/'
-    | '/_admin/admin/roles'
-    | '/_admin/admin/settings'
-    | '/_admin/admin/'
+    | '/_auth/forgot-password/'
     | '/_auth/login/'
     | '/_auth/reset-password/'
     | '/_authenticated/schedule/'
-    | '/_authenticated/_manage/manage/'
+    | '/_authenticated/settings/'
     | '/_authenticated/schedule/me/'
     | '/_authenticated/schedule/team/'
-    | '/_authenticated/_manage/manage/schedule/'
-    | '/_authenticated/_manage/manage/teams/'
-    | '/_authenticated/_manage/manage/users/'
+    | '/_authenticated/settings/general/'
+    | '/_authenticated/settings/roles/'
+    | '/_authenticated/settings/teams/'
+    | '/_authenticated/settings/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
 }
@@ -240,13 +236,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_admin': {
-      id: '/_admin'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
@@ -254,12 +243,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/_manage': {
-      id: '/_authenticated/_manage'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedManageRouteImport
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/settings/': {
+      id: '/_authenticated/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
     }
     '/_authenticated/schedule/': {
       id: '/_authenticated/schedule/'
@@ -282,26 +285,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof AuthRoute
     }
-    '/_admin/admin/': {
-      id: '/_admin/admin/'
-      path: '/admin'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminAdminIndexRouteImport
-      parentRoute: typeof AdminRoute
+    '/_auth/forgot-password/': {
+      id: '/_auth/forgot-password/'
+      path: '/forgot-password'
+      fullPath: '/forgot-password/'
+      preLoaderRoute: typeof AuthForgotPasswordIndexRouteImport
+      parentRoute: typeof AuthRoute
     }
-    '/_admin/admin/settings': {
-      id: '/_admin/admin/settings'
-      path: '/admin/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminAdminSettingsRouteImport
-      parentRoute: typeof AdminRoute
+    '/_authenticated/settings/users/': {
+      id: '/_authenticated/settings/users/'
+      path: '/users'
+      fullPath: '/settings/users/'
+      preLoaderRoute: typeof AuthenticatedSettingsUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
     }
-    '/_admin/admin/roles': {
-      id: '/_admin/admin/roles'
-      path: '/admin/roles'
-      fullPath: '/admin/roles'
-      preLoaderRoute: typeof AdminAdminRolesRouteImport
-      parentRoute: typeof AdminRoute
+    '/_authenticated/settings/teams/': {
+      id: '/_authenticated/settings/teams/'
+      path: '/teams'
+      fullPath: '/settings/teams/'
+      preLoaderRoute: typeof AuthenticatedSettingsTeamsIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
+    }
+    '/_authenticated/settings/roles/': {
+      id: '/_authenticated/settings/roles/'
+      path: '/roles'
+      fullPath: '/settings/roles/'
+      preLoaderRoute: typeof AuthenticatedSettingsRolesIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
+    }
+    '/_authenticated/settings/general/': {
+      id: '/_authenticated/settings/general/'
+      path: '/general'
+      fullPath: '/settings/general/'
+      preLoaderRoute: typeof AuthenticatedSettingsGeneralIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
     }
     '/_authenticated/schedule/team/': {
       id: '/_authenticated/schedule/team/'
@@ -317,85 +334,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedScheduleMeIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/_manage/manage/': {
-      id: '/_authenticated/_manage/manage/'
-      path: '/manage'
-      fullPath: '/manage/'
-      preLoaderRoute: typeof AuthenticatedManageManageIndexRouteImport
-      parentRoute: typeof AuthenticatedManageRoute
-    }
-    '/_authenticated/_manage/manage/users/': {
-      id: '/_authenticated/_manage/manage/users/'
-      path: '/manage/users'
-      fullPath: '/manage/users/'
-      preLoaderRoute: typeof AuthenticatedManageManageUsersIndexRouteImport
-      parentRoute: typeof AuthenticatedManageRoute
-    }
-    '/_authenticated/_manage/manage/teams/': {
-      id: '/_authenticated/_manage/manage/teams/'
-      path: '/manage/teams'
-      fullPath: '/manage/teams/'
-      preLoaderRoute: typeof AuthenticatedManageManageTeamsIndexRouteImport
-      parentRoute: typeof AuthenticatedManageRoute
-    }
-    '/_authenticated/_manage/manage/schedule/': {
-      id: '/_authenticated/_manage/manage/schedule/'
-      path: '/manage/schedule'
-      fullPath: '/manage/schedule/'
-      preLoaderRoute: typeof AuthenticatedManageManageScheduleIndexRouteImport
-      parentRoute: typeof AuthenticatedManageRoute
-    }
   }
 }
 
-interface AdminRouteChildren {
-  AdminAdminRolesRoute: typeof AdminAdminRolesRoute
-  AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
-  AdminAdminIndexRoute: typeof AdminAdminIndexRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminAdminRolesRoute: AdminAdminRolesRoute,
-  AdminAdminSettingsRoute: AdminAdminSettingsRoute,
-  AdminAdminIndexRoute: AdminAdminIndexRoute,
-}
-
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
-
 interface AuthRouteChildren {
+  AuthForgotPasswordIndexRoute: typeof AuthForgotPasswordIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
   AuthResetPasswordIndexRoute: typeof AuthResetPasswordIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthForgotPasswordIndexRoute: AuthForgotPasswordIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
   AuthResetPasswordIndexRoute: AuthResetPasswordIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-interface AuthenticatedManageRouteChildren {
-  AuthenticatedManageManageIndexRoute: typeof AuthenticatedManageManageIndexRoute
-  AuthenticatedManageManageScheduleIndexRoute: typeof AuthenticatedManageManageScheduleIndexRoute
-  AuthenticatedManageManageTeamsIndexRoute: typeof AuthenticatedManageManageTeamsIndexRoute
-  AuthenticatedManageManageUsersIndexRoute: typeof AuthenticatedManageManageUsersIndexRoute
+interface AuthenticatedSettingsRouteChildren {
+  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
+  AuthenticatedSettingsGeneralIndexRoute: typeof AuthenticatedSettingsGeneralIndexRoute
+  AuthenticatedSettingsRolesIndexRoute: typeof AuthenticatedSettingsRolesIndexRoute
+  AuthenticatedSettingsTeamsIndexRoute: typeof AuthenticatedSettingsTeamsIndexRoute
+  AuthenticatedSettingsUsersIndexRoute: typeof AuthenticatedSettingsUsersIndexRoute
 }
 
-const AuthenticatedManageRouteChildren: AuthenticatedManageRouteChildren = {
-  AuthenticatedManageManageIndexRoute: AuthenticatedManageManageIndexRoute,
-  AuthenticatedManageManageScheduleIndexRoute:
-    AuthenticatedManageManageScheduleIndexRoute,
-  AuthenticatedManageManageTeamsIndexRoute:
-    AuthenticatedManageManageTeamsIndexRoute,
-  AuthenticatedManageManageUsersIndexRoute:
-    AuthenticatedManageManageUsersIndexRoute,
+const AuthenticatedSettingsRouteChildren: AuthenticatedSettingsRouteChildren = {
+  AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
+  AuthenticatedSettingsGeneralIndexRoute:
+    AuthenticatedSettingsGeneralIndexRoute,
+  AuthenticatedSettingsRolesIndexRoute: AuthenticatedSettingsRolesIndexRoute,
+  AuthenticatedSettingsTeamsIndexRoute: AuthenticatedSettingsTeamsIndexRoute,
+  AuthenticatedSettingsUsersIndexRoute: AuthenticatedSettingsUsersIndexRoute,
 }
 
-const AuthenticatedManageRouteWithChildren =
-  AuthenticatedManageRoute._addFileChildren(AuthenticatedManageRouteChildren)
+const AuthenticatedSettingsRouteWithChildren =
+  AuthenticatedSettingsRoute._addFileChildren(
+    AuthenticatedSettingsRouteChildren,
+  )
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedManageRoute: typeof AuthenticatedManageRouteWithChildren
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedScheduleIndexRoute: typeof AuthenticatedScheduleIndexRoute
   AuthenticatedScheduleMeIndexRoute: typeof AuthenticatedScheduleMeIndexRoute
@@ -403,7 +383,8 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedManageRoute: AuthenticatedManageRouteWithChildren,
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedScheduleIndexRoute: AuthenticatedScheduleIndexRoute,
   AuthenticatedScheduleMeIndexRoute: AuthenticatedScheduleMeIndexRoute,
@@ -415,7 +396,6 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
 }

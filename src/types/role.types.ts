@@ -2,7 +2,7 @@
 export type Role = {
   id: string;
   name: string;
-  description: string;
+  description?: string | null;
   isSystem: boolean;
   isDefault: boolean;
   createdAt: string;
@@ -12,14 +12,14 @@ export type Role = {
     name: string;
     resource: string;
     action: string;
-    description: string;
+    description?: string | null;
   }>;
 };
 
 export type CreateRoleInput = {
   name: string;
   description: string;
-  permissionIds?: string[];
+  permissionIds: string[];
   isDefault?: boolean;
 };
 
